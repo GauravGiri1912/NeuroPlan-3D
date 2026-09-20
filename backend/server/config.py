@@ -5,8 +5,14 @@ import os
 
 # --- Server ---
 HOST = "0.0.0.0"
-PORT = 8000
-CORS_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
+PORT = int(os.environ.get("PORT", 8000))
+CORS_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"] + [
+    origin.strip()
+    for origin in os.environ.get("EXTRA_CORS_ORIGINS", "").split(",")
+    if origin.strip()
+]
+# Deployed frontend hosts (Vercel prod + preview URLs) beyond the fixed list above.
+CORS_ORIGIN_REGEX = os.environ.get("CORS_ORIGIN_REGEX", r"https://.*\.vercel\.app")
 
 # --- Gemini API ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
