@@ -4,6 +4,8 @@
 
 > "AI proposes. Physics decides."
 
+**Live demo:** [frontend-gauravgiri14181-2606s-projects.vercel.app](https://frontend-gauravgiri14181-2606s-projects.vercel.app)
+
 ## Overview
 
 NeuroPlan-3D is a prototype engineering tool that turns a natural-language structural
