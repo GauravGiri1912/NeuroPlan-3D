@@ -1,0 +1,1088 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   NeuroPlan-3D Industrial Design System
+   Engineering workstation aesthetic
+   ───────────────────────────────────────────── */
+
+@theme {
+  --color-bg-primary: #1a1d23;
+  --color-bg-secondary: #22262e;
+  --color-bg-tertiary: #282c35;
+  --color-bg-viewport: #12141a;
+  --color-border: #2d3240;
+  --color-border-light: #3a4050;
+  --color-text-primary: #e1e4ea;
+  --color-text-secondary: #8b919e;
+  --color-text-muted: #5c6370;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-accent-dim: #1e3a5f;
+  --color-teal: #14b8a6;
+  --color-success: #22c55e;
+  --color-success-dim: #162e1a;
+  --color-warning: #f59e0b;
+  --color-warning-dim: #3d2e0a;
+  --color-danger: #ef4444;
+  --color-danger-dim: #3d1515;
+  --color-info: #3b82f6;
+}
+
+/* ─────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────────
+   Typography — Engineering Software Rules
+   ───────────────────────────────────────────── */
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+.text-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+}
+
+.text-unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+}
+
+.text-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────
+   Scrollbar — Minimal engineering style
+   ───────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-light);
+}
+
+/* ─────────────────────────────────────────────
+   Layout
+   ───────────────────────────────────────────── */
+
+.app-shell {
+  display: grid;
+  grid-template-rows: 52px 1fr 28px;
+  grid-template-columns: 224px 1fr;
+  height: 100vh;
+  width: 100vw;
+  gap: 0;
+}
+
+.toolbar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  gap: 14px;
+  z-index: 10;
+}
+
+/* ── Primary navigation sidebar ── */
+
+.nav-sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  background: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-group-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  padding: 0 10px 6px;
+}
+
+.nav-item {
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 12.5px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.nav-item:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.nav-item.active {
+  background: var(--color-accent-dim);
+  border-left-color: var(--color-accent);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* ── Main workspace ── */
+
+.workspace-main {
+  grid-column: 2;
+  grid-row: 2;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.view-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 28px 32px 48px;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.view-header {
+  margin-bottom: 24px;
+}
+
+.view-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  margin: 4px 0 6px;
+}
+
+.view-subtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.view-section {
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+}
+
+/* ── Model workspace ── */
+
+.model-view {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  height: 100%;
+  min-height: 0;
+}
+
+.model-side {
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--color-bg-secondary);
+  border-left: 1px solid var(--color-border);
+  padding: 10px 0;
+}
+
+/* ── Overview 3D preview ── */
+
+.overview-preview {
+  height: 50vh;
+  min-height: 360px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: var(--color-bg-viewport);
+}
+
+/* Overview command-center layer: compact, high-signal, and action-oriented. */
+.overview-commandbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 16px;
+  margin: -6px 0 10px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 3px;
+}
+
+.commandbar-label, .eyebrow-tag {
+  color: var(--color-text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.commandbar-title { margin-top: 3px; color: var(--color-text-primary); font-size: 14px; font-weight: 650; }
+.commandbar-meta { color: var(--color-text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 10px; margin-top: 4px; }
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 6px 9px;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+}
+.status-chip.pass { color: var(--color-success); border-color: #285d39; }
+.status-chip.fail { color: var(--color-danger); border-color: #663034; }
+.status-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  margin: 0 0 18px;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.workflow-step {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 8px 6px;
+  color: var(--color-text-muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+.workflow-step.complete { color: var(--color-text-secondary); }
+.workflow-index { color: var(--color-text-muted); font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+.workflow-step.complete .workflow-index { color: var(--color-accent); }
+
+.section-heading-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.section-helper { color: var(--color-text-muted); font-size: 11px; margin-top: -5px; margin-bottom: 10px; }
+.capability-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.capability-card {
+  display: flex; flex-direction: column; align-items: flex-start; min-height: 86px;
+  padding: 10px; text-align: left; cursor: pointer;
+  background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 3px;
+  color: inherit; font-family: inherit; transition: border-color .12s, background .12s;
+}
+.capability-card:hover { background: var(--color-bg-tertiary); border-color: var(--color-border-light); }
+.capability-card.emphasis { border-color: #6b4a15; background: #262018; }
+.capability-card-title { color: var(--color-text-primary); font-size: 12px; font-weight: 650; }
+.capability-card-detail { min-height: 30px; margin-top: 3px; color: var(--color-text-muted); font-size: 10px; line-height: 1.4; }
+.capability-card-status { margin-top: auto; color: var(--color-accent); font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; }
+.capability-card.emphasis .capability-card-status { color: var(--color-warning); }
+
+/* ── Engineering Summary — coverage, key/value facts, limitations ── */
+
+.summary-notrun {
+  padding: 10px 12px; border: 1px dashed var(--color-border-light); border-radius: 3px;
+  color: var(--color-text-muted); font-family: 'JetBrains Mono', monospace; font-size: 11px;
+}
+
+.summary-kv-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+}
+.summary-kv {
+  padding: 8px 10px; background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border); border-radius: 3px;
+}
+.summary-kv-label {
+  font-size: 9px; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--color-text-muted);
+}
+.summary-kv-value {
+  margin-top: 3px; font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 600; color: var(--color-text-primary);
+}
+.summary-kv-note { margin-top: 3px; font-size: 9px; line-height: 1.4; color: var(--color-text-muted); }
+
+.coverage-group { margin-bottom: 12px; }
+.coverage-group-title {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--color-text-secondary); margin-bottom: 5px;
+}
+.coverage-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.coverage-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  padding: 8px 10px; text-align: left; cursor: pointer;
+  background: var(--color-bg-secondary); border: 1px solid var(--color-border);
+  border-radius: 3px; color: inherit; font-family: inherit;
+  transition: border-color .12s, background .12s;
+}
+.coverage-item:hover { background: var(--color-bg-tertiary); border-color: var(--color-border-light); }
+.coverage-item-label { color: var(--color-text-primary); font-size: 11.5px; font-weight: 650; }
+.coverage-item-detail {
+  min-height: 26px; color: var(--color-text-muted); font-size: 9.5px; line-height: 1.35;
+}
+.coverage-item-state {
+  margin-top: auto; font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: .03em;
+}
+
+.summary-limitations { display: flex; flex-direction: column; gap: 5px; }
+.summary-limitation {
+  padding-left: 10px; border-left: 2px solid var(--color-warning);
+  color: var(--color-text-secondary); font-size: 11px; line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .capability-grid { grid-template-columns: repeat(3, 1fr); }
+  .coverage-row { grid-template-columns: repeat(2, 1fr); }
+  .summary-kv-grid { grid-template-columns: repeat(2, 1fr); }
+  .workflow-strip { overflow-x: auto; grid-template-columns: repeat(7, minmax(100px, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .overview-commandbar { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .capability-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Readability pass: keep the existing dense workstation layout, but bring
+   all user-facing labels into a comfortable reading range. */
+html, body, #root { font-size: 14px; }
+.nav-item { font-size: 14px; padding-top: 8px; padding-bottom: 8px; }
+.nav-group-title { font-size: 11px; }
+.text-label { font-size: 12px; }
+.view-content { font-size: 14px; }
+.view-subtitle { font-size: 14px; }
+.section-title { font-size: 13px; margin-bottom: 12px; }
+.section-helper { font-size: 12px; }
+.panel-section { font-size: 13px; }
+.panel-section-title { font-size: 12px; }
+.statusbar, .toolbar-status-pill { font-size: 12px; }
+.metric-card { padding: 9px 11px; }
+.metric-label { font-size: 11px; }
+.metric-value { font-size: 18px; }
+.metric-unit { font-size: 12px; }
+.workflow-step { font-size: 12px; }
+.workflow-index { font-size: 10px; }
+.capability-card-title { font-size: 13px; }
+.capability-card-detail { font-size: 11px; }
+.capability-card-status { font-size: 10px; }
+
+/* A number of existing panels use inline 9–11px engineering annotations.
+   Raise those annotations without touching their state, spacing logic, or
+   functional controls. */
+.panel-section [style*="font-size: 9px"] { font-size: 11px !important; }
+.panel-section [style*="font-size: 10px"] { font-size: 12px !important; }
+.panel-section [style*="font-size: 11px"] { font-size: 13px !important; }
+.view-content [style*="font-size: 9px"] { font-size: 11px !important; }
+.view-content [style*="font-size: 10px"] { font-size: 12px !important; }
+.view-content [style*="font-size: 11px"] { font-size: 13px !important; }
+
+@media (max-width: 760px) {
+  .view-content { padding: 22px 20px 40px; }
+  .overview-preview { min-height: 300px; }
+  .overview-commandbar { margin-top: 0; }
+}
+
+/* ── Toolbar status pill ── */
+
+.toolbar-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.toolbar-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.viewport-container {
+  background: var(--color-bg-viewport);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
+}
+
+.statusbar {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--color-bg-tertiary);
+  border-top: 1px solid var(--color-border);
+  gap: 16px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+/* ─────────────────────────────────────────────
+   Panel Sections
+   ───────────────────────────────────────────── */
+
+.panel-section {
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 12px;
+}
+
+.panel-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.panel-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+}
+
+/* ─────────────────────────────────────────────
+   Form Controls — Industrial, dense
+   ───────────────────────────────────────────── */
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.field-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.field-input {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  color: var(--color-text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 5px 8px;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.field-input:focus {
+  border-color: var(--color-accent);
+}
+
+.field-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.field-select {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  color: var(--color-text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 5px 8px;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.field-select:focus {
+  border-color: var(--color-accent);
+}
+
+textarea.field-input {
+  resize: vertical;
+  min-height: 60px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+}
+
+/* ─────────────────────────────────────────────
+   Buttons — Flat, industrial
+   ───────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--color-border);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-sm {
+  padding: 3px 8px;
+  font-size: 11px;
+}
+
+/* ─────────────────────────────────────────────
+   Data Table — Dense, monospace
+   ───────────────────────────────────────────── */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 4px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  background: var(--color-bg-secondary);
+}
+
+.data-table th.num {
+  text-align: right;
+}
+
+.data-table td {
+  padding: 3px 6px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.data-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table tr:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.data-table tr.status-fail {
+  border-left: 3px solid var(--color-danger);
+}
+
+.data-table tr.status-ok {
+  border-left: 3px solid var(--color-success);
+}
+
+.data-table tr.status-warning {
+  border-left: 3px solid var(--color-warning);
+}
+
+/* ─────────────────────────────────────────────
+   Verification Badge
+   ───────────────────────────────────────────── */
+
+.verification-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.verification-badge.pass {
+  background: var(--color-success-dim);
+  border-left: 3px solid var(--color-success);
+  color: var(--color-success);
+}
+
+.verification-badge.fail {
+  background: var(--color-danger-dim);
+  border-left: 3px solid var(--color-danger);
+  color: var(--color-danger);
+}
+
+.verification-badge.pending {
+  background: var(--color-bg-tertiary);
+  border-left: 3px solid var(--color-text-muted);
+  color: var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────
+   Pipeline Progress Indicator
+   ───────────────────────────────────────────── */
+
+.pipeline-stages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pipeline-stage {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.pipeline-stage.complete {
+  color: var(--color-success);
+}
+
+.pipeline-stage.active {
+  color: var(--color-accent);
+}
+
+.pipeline-stage.error {
+  color: var(--color-danger);
+}
+
+.stage-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.pipeline-stage.complete .stage-dot {
+  background: var(--color-success);
+}
+
+.pipeline-stage.active .stage-dot {
+  background: var(--color-accent);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.pipeline-stage.error .stage-dot {
+  background: var(--color-danger);
+}
+
+.stage-separator {
+  width: 12px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ─────────────────────────────────────────────
+   Metric Cards
+   ───────────────────────────────────────────── */
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.metric-card {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  padding: 6px 8px;
+}
+
+.metric-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.metric-unit {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   Repair Timeline
+   ───────────────────────────────────────────── */
+
+.repair-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timeline-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 20px;
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.timeline-dot.pass { background: var(--color-success); }
+.timeline-dot.fail { background: var(--color-danger); }
+
+.timeline-line {
+  width: 1px;
+  flex: 1;
+  background: var(--color-border);
+  margin-top: 4px;
+}
+
+.timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.timeline-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.timeline-detail {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   Viewport Toolbar Overlay
+   ───────────────────────────────────────────── */
+
+.viewport-toolbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 2px;
+  z-index: 5;
+}
+
+.viewport-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34, 38, 46, 0.85);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.12s;
+}
+
+.viewport-btn:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.viewport-btn.active {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ─────────────────────────────────────────────
+   Viewport Info Overlay
+   ───────────────────────────────────────────── */
+
+.viewport-info {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   Toolbar specifics
+   ───────────────────────────────────────────── */
+
+.toolbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.toolbar-brand-icon {
+  width: 20px;
+  height: 20px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--color-border);
+}
+
+.toolbar-project {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+/* ─────────────────────────────────────────────
+   Loading / Spinner
+   ───────────────────────────────────────────── */
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────────
+   Empty State
+   ───────────────────────────────────────────── */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-state-icon {
+  font-size: 32px;
+  opacity: 0.3;
+}
+
+.empty-state-text {
+  font-size: 12px;
+  max-width: 200px;
+}
+
+/* ─── Engineering Inspector ─── */
+.inspector-overlay {
+  position: absolute;
+  top: 44px;
+  right: 12px;
+  width: 340px;
+  max-height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(22, 24, 31, 0.97);
+  border: 1px solid #2a2d38;
+  border-radius: 4px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  z-index: 20;
+}
+
+.inspector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #2a2d38;
+  flex: 0 0 auto;
+}
+
+.inspector-body {
+  padding: 10px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+/* Final readability overrides. These intentionally affect typography only. */
+html, body, #root { font-size: 14px; }
+.nav-item { font-size: 14px; padding-top: 8px; padding-bottom: 8px; }
+.nav-group-title { font-size: 11px; }
+.text-label { font-size: 12px; }
+.view-content, .view-subtitle { font-size: 14px; }
+.section-title { font-size: 13px; margin-bottom: 12px; }
+.section-helper { font-size: 12px; }
+.panel-section { font-size: 13px; }
+.panel-section-title { font-size: 12px; }
+.statusbar, .toolbar-status-pill { font-size: 12px; }
+.metric-card { padding: 9px 11px; }
+.metric-label { font-size: 11px; }
+.metric-value { font-size: 18px; }
+.metric-unit { font-size: 12px; }
+.workflow-step { font-size: 12px; }
+.workflow-index { font-size: 10px; }
+.capability-card-title { font-size: 13px; }
+.capability-card-detail { font-size: 11px; }
+.capability-card-status { font-size: 10px; }
+.panel-section [style*="font-size: 9px"], .view-content [style*="font-size: 9px"] { font-size: 11px !important; }
+.panel-section [style*="font-size: 10px"], .view-content [style*="font-size: 10px"] { font-size: 12px !important; }
+.panel-section [style*="font-size: 11px"], .view-content [style*="font-size: 11px"] { font-size: 13px !important; }
+.run-action-button {
+  min-height: 36px !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  white-space: nowrap;
+}
+.engineering-panel { min-width: 0; overflow: visible; }
+.engineering-panel > div, .engineering-panel [style*="font-family"] { min-width: 0; }
+.engineering-panel span { overflow-wrap: anywhere; }
+.engineering-panel span[style*="text-align: right"] { overflow-wrap: normal; }
+
+@media (max-width: 760px) {
+  .view-content { padding: 22px 20px 40px; }
+  .overview-preview { min-height: 300px; }
+}
