@@ -49,6 +49,9 @@ interface AppState {
   // ── Navigation (UI shell only — no engineering meaning) ──
   activeNavView: NavView;
   setActiveNavView: (v: NavView) => void;
+  // Mobile nav drawer — desktop layout ignores this entirely (CSS-gated).
+  mobileNavOpen: boolean;
+  setMobileNavOpen: (open: boolean) => void;
 
   // ── Specification ──
   rawInput: string;
@@ -161,7 +164,9 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
   // ── Navigation ──
   activeNavView: 'overview',
-  setActiveNavView: (v) => set({ activeNavView: v }),
+  setActiveNavView: (v) => set({ activeNavView: v, mobileNavOpen: false }),
+  mobileNavOpen: false,
+  setMobileNavOpen: (open) => set({ mobileNavOpen: open }),
 
   // ── Specification ──
   rawInput: '',

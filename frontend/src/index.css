@@ -450,6 +450,76 @@ html, body, #root { font-size: 14px; }
   .view-content { padding: 22px 20px 40px; }
   .overview-preview { min-height: 300px; }
   .overview-commandbar { margin-top: 0; }
+
+  /* ── The actual mobile layout fix ──
+     Desktop keeps a fixed 224px sidebar column always visible. Below this
+     width that left nothing but a ~170px sliver for content. The sidebar
+     now becomes an off-canvas drawer: hidden by default, toggled by the
+     hamburger button, full-width content underneath. */
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar-hamburger {
+    display: flex;
+  }
+
+  .toolbar {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .toolbar-brand span {
+    display: none; /* keep just the "N" mark — brand name wraps at this width */
+  }
+
+  .toolbar-project {
+    max-width: 30vw;
+  }
+
+  .nav-sidebar {
+    grid-column: 1;
+    position: fixed;
+    top: 52px;
+    left: 0;
+    bottom: 28px;
+    width: 260px;
+    max-width: 80vw;
+    z-index: 30;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    bottom: 28px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 25;
+  }
+
+  .workspace-main {
+    grid-column: 1;
+  }
+
+  .model-view {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .model-side {
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    max-height: 40vh;
+  }
 }
 
 /* ── Toolbar status pill ── */
@@ -967,6 +1037,40 @@ textarea.field-input {
 .toolbar-project {
   font-size: 12px;
   color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* Hamburger — hidden above the mobile breakpoint (see @media max-width: 760px
+   for the base layout it belongs to; kept out of that block itself so this
+   min-width guard, not source order, is what decides visibility). */
+.toolbar-hamburger {
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+@media (min-width: 761px) {
+  .toolbar-hamburger { display: none; }
+}
+.toolbar-hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--color-text-secondary);
+  border-radius: 1px;
+}
+
+.nav-backdrop {
+  display: none;
 }
 
 .toolbar-spacer {

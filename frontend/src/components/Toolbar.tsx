@@ -35,6 +35,8 @@ const STATUS_COLOR: Record<string, string> = {
 };
 
 export default function Toolbar() {
+  const mobileNavOpen = useAppStore((s) => s.mobileNavOpen);
+  const setMobileNavOpen = useAppStore((s) => s.setMobileNavOpen);
   const spec = useAppStore((s) => s.spec);
   const rawInput = useAppStore((s) => s.rawInput);
   const pipelineStage = useAppStore((s) => s.pipelineStage);
@@ -59,6 +61,13 @@ export default function Toolbar() {
 
   return (
     <div className="toolbar">
+      <button
+        className="toolbar-hamburger"
+        aria-label={mobileNavOpen ? 'Close navigation' : 'Open navigation'}
+        onClick={() => setMobileNavOpen(!mobileNavOpen)}
+      >
+        <span /><span /><span />
+      </button>
       <div className="toolbar-brand">
         <div className="toolbar-brand-icon">N</div>
         <span>NeuroPlan-3D</span>

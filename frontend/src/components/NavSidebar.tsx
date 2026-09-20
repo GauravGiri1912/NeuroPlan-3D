@@ -62,23 +62,30 @@ const NAV_GROUPS: NavGroup[] = [
 export default function NavSidebar() {
   const activeNavView = useAppStore((s) => s.activeNavView);
   const setActiveNavView = useAppStore((s) => s.setActiveNavView);
+  const mobileNavOpen = useAppStore((s) => s.mobileNavOpen);
+  const setMobileNavOpen = useAppStore((s) => s.setMobileNavOpen);
 
   return (
-    <nav className="nav-sidebar">
-      {NAV_GROUPS.map((group) => (
-        <div className="nav-group" key={group.title}>
-          <div className="nav-group-title">{group.title}</div>
-          {group.items.map((item) => (
-            <button
-              key={item.id}
-              className={`nav-item${activeNavView === item.id ? ' active' : ''}`}
-              onClick={() => setActiveNavView(item.id)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      ))}
-    </nav>
+    <>
+      {mobileNavOpen && (
+        <div className="nav-backdrop" onClick={() => setMobileNavOpen(false)} />
+      )}
+      <nav className={`nav-sidebar${mobileNavOpen ? ' mobile-open' : ''}`}>
+        {NAV_GROUPS.map((group) => (
+          <div className="nav-group" key={group.title}>
+            <div className="nav-group-title">{group.title}</div>
+            {group.items.map((item) => (
+              <button
+                key={item.id}
+                className={`nav-item${activeNavView === item.id ? ' active' : ''}`}
+                onClick={() => setActiveNavView(item.id)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        ))}
+      </nav>
+    </>
   );
 }
