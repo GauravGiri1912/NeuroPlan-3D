@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://neuroplan-3d-production.up.railway.app/api/:path*"
+    }
+  ]
+}
